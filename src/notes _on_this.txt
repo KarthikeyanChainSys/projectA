@@ -1,0 +1,64 @@
+// this.title = title; // this.title is global variable, and title is a local variable
+		// this.director = director;
+		title = filmtitle; // This is similar to this.title = filmtitle, but using this.prefix is not compulsory
+		director = filmdirector; // This is similar to this.director = filmdirector, but using this.prefix is not compulsory
+		// As there are no local variables by name title, or director 
+		// So, here they will implicitly referred to global variable
+		//Note: If title and director are not globally declare then it will be undeclared variable cannot be resolved to a variable
+		// If the parameter names are similar to the global variables
+		// then there is an ambiguity between the local variables (parameters) and global variables
+		// Hence this. prefix is used for referring the global variables
+		// title = title will be referring the local variables on both side of the = operator(x=x) self assigning
+		
+10-06-2022
+----------	
+	* depends-on="fourstroke,mrf"
+		- depends-on should not be used with prototype
+		- depends-on are suitable for singleton beans
+		- The depends-on attribute can explicitly force one or more beans to be initialized before the bean using 
+			this element is initialized.
+		- To express a dependency on multiple beans, supply a list of bean names as the value of the depends-on attribute, 
+			with commas, whitespace and semicolons, used as valid delimiters. 
+
+Life Cycle methods:
+-------------------
+	1. ini-method is post object creation
+	2. destroy-method is pre object destruction
+	* init-method="" this method is executed immediately after the constructor
+		- This method can be used to setup the object before it is ready for service calls
+	* destroy-method is only working with singleton
+		- destroy-method is executed before garbage collector call
+		- when an object starts init-method runs then it will run destroy-method when set to null. 
+		
+	Spring does not manage the complete lifecycle of a prototype bean: 
+		- the container instantiates, configures, decorates and otherwise assembles a prototype object, 
+			hands it to the client and then has no further knowledge of that prototype instance. 
+		- For releasing resources try to implement a custom bean post processor.
+		
+Notes: 
+------
+	- The Spring framework enables automatic dependency injection. 
+	- In other words, by declaring all the bean dependencies in a Spring configuration file, Spring container can autoWire relationships between collaborating beans. 
+	- This is called Spring bean autoWiring.
+	
+AutoWiring has the following advantages:
+----------------------------------------
+	• AutoWiring can significantly reduce the need to specify properties or constructor arguments. (Other mechanisms such as a bean template discussed elsewhere in this chapter are also valuable in this regard.)
+	• AutoWiring can update a configuration as your objects evolve. For example, if you need to add a dependency to a class, that dependency can be satisfied automatically without you needing to modify the configuration.
+
+	- Thus autoWiring can be especially useful during development, without negating the option of switching to explicit wiring when the code base becomes more stable
+	- You can combine autoWire behavior with dependency checking, which is performed after autoWiring completes.
+----------------------------------------------------------------------------------------------
+finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
